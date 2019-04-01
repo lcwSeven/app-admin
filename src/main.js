@@ -3,68 +3,52 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-// use es6 syntax and api
-import 'babel-polyfill'
-
-// use element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import store from './store'
+import {getRequest} from './utils/api'
+import {postRequest} from './utils/api'
+import {deleteRequest} from './utils/api'
+import {putRequest} from './utils/api'
+import {initMenu} from './utils/utils'
+import {isNotNullORBlank} from './utils/utils'
+import './utils/filter_utils'
+import 'font-awesome/css/font-awesome.min.css'
 
-// use vue-router
-import VueRouter from 'vue-router'
-
-// use lodash
-import _ from 'lodash'
-
-// use moment
-import moment from 'moment'
-
-// use font-awesome, when podutive happen error,so link it by cdn
-// import 'font-awesome/css/font-awesome.min.css'
-
-// register global filter
-import '@/utils/filters'
-
-// use vuex
-import store from './store/index'
-
-// use public.less to enable index.html
-import './styles/public.less'
-
-
-// use axios
-import {post,fetch,patch,put} from './service/requestApi.js'
-Vue.prototype.$post=post;
-Vue.prototype.$fetch=fetch;
-Vue.prototype.$patch=patch;
-Vue.prototype.$put=put;
-
-// Vue.config.productionTip = false
-
+Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.use(VueRouter)
 
+Vue.prototype.getRequest = getRequest;
+Vue.prototype.postRequest = postRequest;
+Vue.prototype.deleteRequest = deleteRequest;
+Vue.prototype.putRequest = putRequest;
+Vue.prototype.isNotNullORBlank = isNotNullORBlank;
 
-// handle admin, should release
-router.beforeEach((to,from,next) => {
-	if(to.path == '/login'){
-		sessionStorage.removeItem('user');
-	}
-	let user = JSON.parse(sessionStorage.getItem('user'));
-	if(!user && to.path != '/login'){
-		next({path: '/login'})
-	} else{
-		next()
-	}
-})
+router.beforeEach((to, from, next)=> {
+    if (to.name == 'Login') {
+      next();
+      return;
+    }
+    var name = store.state.user.name;
+    if (name == '未登录') {
+      if (to.meta.requireAuth || to.name == null) {
+        next({path: '/', query: {redirect: to.path}})
+      } else {
+        next();
+      }
+    } else {
+      initMenu(router, store);
+      if(to.path=='/chat')
+        store.commit("updateMsgList", []);
+      next();
+    }
+  }
+)
 
-/* eslint-disable no-new */
 new Vue({
-  // el: '#app',
-  // template: '<App/>',
+  el: '#app',
   router,
   store,
-  // components: { App }
-  render: h => h(App)
-}).$mount('#app');
+  template: '<App/>',
+  components: {App}
+})
