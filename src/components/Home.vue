@@ -56,18 +56,6 @@
       this.loadNF();
     },
     methods: {
-      loadNF(){
-        var _this = this;
-        this.getRequest("/chat/sysmsgs").then(resp=> {
-          var isDot = false;
-          resp.data.forEach(msg=> {
-            if (msg.state == 0) {
-              isDot = true;
-            }
-          })
-          _this.$store.commit('toggleNFDot', isDot);
-        })
-      },
       handleCommand(cmd){
         var _this = this;
         if (cmd == 'logout') {

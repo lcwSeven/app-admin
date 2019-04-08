@@ -1,19 +1,17 @@
 import axios from 'axios'
 import {Message} from 'element-ui'
+import {SUCCESS} from '../utils/contant'
 axios.interceptors.request.use(config => {
   return config;
 }, err => {
   Message.error({message: '请求超时!'});
-  // return Promise.resolve(err);
 })
 axios.interceptors.response.use(data => {
-  if (data.status && data.status == 200 && data.data.status == 500) {
-    Message.error({message: data.data.msg});
+  if (data.status && data.status == 200 && data.data.retCode != SUCCESS) {
+    Message.error({message: data.data.retMsg});
     return;
   }
-  if (data.data.msg) {
-    Message.success({message: data.data.msg});
-  }
+
   return data;
 }, err => {
   if (err.response.status == 504 || err.response.status == 404) {
@@ -21,10 +19,10 @@ axios.interceptors.response.use(data => {
   } else if (err.response.status == 403) {
     Message.error({message: '权限不足,请联系管理员!'});
   } else if (err.response.status == 401) {
-    Message.error({message: err.response.data.msg});
+    Message.error({message: err.response.data.retMsg});
   } else {
-    if (err.response.data.msg) {
-      Message.error({message: err.response.data.msg});
+    if (err.response.data.retMsg) {
+      Message.error({message: err.response.data.retMsg});
     }else{
       Message.error({message: '未知错误!'});
     }

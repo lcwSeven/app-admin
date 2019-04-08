@@ -11,13 +11,15 @@
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
     <el-checkbox class="login_remember" v-model="checked"
-                 label-position="left">记住密码</el-checkbox>
+                 label-position="left">记住密码
+    </el-checkbox>
     <el-form-item style="width: 100%">
       <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
+  import {SUCCESS} from "../utils/contant"
   export default{
     data(){
       return {
@@ -27,7 +29,7 @@
         },
         checked: true,
         loginForm: {
-          userName: 'seven',
+          userName: 'admin',
           password: '123456'
         },
         loading: false
@@ -40,14 +42,19 @@
         this.postRequest('/login', {
           userName: this.loginForm.userName,
           password: this.loginForm.password
-        }).then(resp=> {
+        }).then(resp => {
           _this.loading = false;
           if (resp && resp.status === 200) {
-            let data = resp.data;
-            _this.$store.commit('login', data.data);
-            let path = _this.$route.query.redirect;
-            _this.$router
-              .replace({path: path == '/' || path == undefined ? '/home' : path});
+            if (resp.data['retCode'] === SUCCESS) {
+              let data = resp.data;
+              _this.$store.commit('login', data.data);
+              let path = _this.$route.query.redirect;
+              _this.$router
+                .replace({path: path == '/' || path == undefined ? '/home' : path});
+            } else {
+              _this.$message.error(resp.data['retMsg'])
+            }
+
           }
         });
       }
@@ -65,11 +72,13 @@
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
   }
+
   .login_title {
     margin: 0px auto 40px auto;
     text-align: center;
     color: #505458;
   }
+
   .login_remember {
     margin: 0px 0px 35px 0px;
     text-align: left;

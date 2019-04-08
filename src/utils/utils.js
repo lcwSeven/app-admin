@@ -15,9 +15,9 @@ export const initMenu = (router, store)=> {
   if (store.state.routes.length > 0) {
     return;
   }
-  getRequest("/config/sysmenu").then(resp=> {
+  getRequest("/system/menus").then(resp=> {
     if (resp && resp.status == 200) {
-      var fmtRoutes = formatRoutes(resp.data);
+      var fmtRoutes = formatRoutes(resp.data.data);
       router.addRoutes(fmtRoutes);
       store.commit('initMenu', fmtRoutes);
       store.dispatch('connect');
@@ -32,7 +32,6 @@ export const formatRoutes = (routes)=> {
       component,
       name,
       meta,
-      iconCls,
       children
     } = router;
     if (children && children instanceof Array) {
@@ -42,16 +41,14 @@ export const formatRoutes = (routes)=> {
       path: path,
       component(resolve){
         if (component.startsWith("Home")) {
-        } else if (component.startsWith("Emp")) {
-
-        } else if (component.startsWith("Per")) {
-        } else if (component.startsWith("Sal")) {
-        } else if (component.startsWith("Sta")) {
+          require(['../components/' + component + '.vue'], resolve)
         } else if (component.startsWith("Sys")) {
+          require(['../components/system/'+ component + '.vue'],resolve)
+        }else if (component.startsWith("Data")){
+          require(['../components/data_manager/'+ component + '.vue'],resolve)
         }
       },
       name: name,
-      iconCls: iconCls,
       meta: meta,
       children: children
     };
