@@ -7,11 +7,10 @@ axios.interceptors.request.use(config => {
   Message.error({message: '请求超时!'});
 })
 axios.interceptors.response.use(data => {
-  if (data.status && data.status == 200 && data.data.retCode != SUCCESS) {
-    Message.error({message: data.data.retMsg});
+  if (data.status && data.status == 200 && data.data['retCode'] != SUCCESS) {
+    Message.error({message: data.data['retMsg']});
     return;
   }
-
   return data;
 }, err => {
   if (err.response.status == 504 || err.response.status == 404) {
@@ -23,11 +22,10 @@ axios.interceptors.response.use(data => {
   } else {
     if (err.response.data.retMsg) {
       Message.error({message: err.response.data.retMsg});
-    }else{
+    } else {
       Message.error({message: '未知错误!'});
     }
   }
-  // return Promise.resolve(err);
 })
 let base = '/app-admin-server';
 export const postRequest = (url, params) => {
