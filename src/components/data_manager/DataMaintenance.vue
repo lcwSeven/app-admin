@@ -123,7 +123,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据1:" prop="dataOne">
-                  <el-input v-model="appOneData.dataOne" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataOne" size="mini" style="width: 150px"
                             placeholder="请输入数据1"></el-input>
                 </el-form-item>
               </div>
@@ -132,7 +132,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据2" prop="dataTwo">
-                  <el-input v-model="appOneData.dataTwo" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataTwo" size="mini" style="width: 150px"
                             placeholder="请输入数据2"></el-input>
                 </el-form-item>
               </div>
@@ -143,7 +143,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据3" prop="dataThree">
-                  <el-input v-model="appOneData.dataThree" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataThree" size="mini" style="width: 150px"
                             placeholder="请输入数据3"></el-input>
                 </el-form-item>
               </div>
@@ -151,7 +151,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据4" prop="dataFour">
-                  <el-input v-model="appOneData.dataFour" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataFour" size="mini" style="width: 150px"
                             placeholder="请输入数据4"></el-input>
                 </el-form-item>
               </div>
@@ -161,7 +161,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据5" prop="dataFive">
-                  <el-input v-model="appOneData.dataFive" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataFive" size="mini" style="width: 150px"
                             placeholder="请输入数据5"></el-input>
                 </el-form-item>
               </div>
@@ -169,7 +169,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据6:" prop="dataSix">
-                  <el-input v-model="appOneData.dataSix" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataSix" size="mini" style="width: 150px"
                             placeholder="请输入数据6"></el-input>
                 </el-form-item>
               </div>
@@ -179,7 +179,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据7:" prop="dataSeven">
-                  <el-input v-model="appOneData.dataSeven" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataSeven" size="mini" style="width: 150px"
                             placeholder="请输入数据7"></el-input>
                 </el-form-item>
               </div>
@@ -187,7 +187,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据8:" prop="dataEight">
-                  <el-input v-model="appOneData.dataEight" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataEight" size="mini" style="width: 150px"
                             placeholder="请输入数据8"></el-input>
                 </el-form-item>
               </div>
@@ -197,7 +197,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据9:" prop="dataNine">
-                  <el-input v-model="appOneData.dataNine" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataNine" size="mini" style="width: 150px"
                             placeholder="请输入数据9"></el-input>
                 </el-form-item>
               </div>
@@ -205,7 +205,7 @@
             <el-col :span="6">
               <div>
                 <el-form-item label="数据10:" prop="dataTen">
-                  <el-input v-model="appOneData.dataTen" size="mini" style="width: 200px"
+                  <el-input v-model="appOneData.dataTen" size="mini" style="width: 150px"
                             placeholder="请输入数据10"></el-input>
                 </el-form-item>
               </div>
